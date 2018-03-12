@@ -1,0 +1,56 @@
+.ng-dropdown {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 10px;
+}
+.ng-dropdown .ng-dropdown__title {
+  padding-bottom: 5px;
+}
+.ng-dropdown .ng-dropdown__button {
+  background: white;
+  border: 1px solid #C9C9C9;
+  padding: 2px 10px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.ng-dropdown .ng-dropdown__button img {
+  height: 10px;
+}
+.ng-dropdown .ng-dropdown__button.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+.ng-dropdown .ng-dropdown__container {
+  background: white;
+  list-style-type: none;
+  border: 1px solid #C9C9C9;
+  position: fixed;
+  left: -10000px;
+  outline: none;
+  box-sizing: border-box;
+  overflow: auto;
+  z-index: 10001;
+  padding: 0;
+}
+.ng-dropdown .ng-dropdown__container:focus {
+  left: 0;
+}
+.ng-dropdown .ng-dropdown__container:focus + .ng-dropdown__button {
+  pointer-events: none;
+}
+.ng-dropdown .ng-dropdown__container li:hover {
+  background-color: #6FBBFF;
+  color: white;
+}
+.ng-dropdown .ng-dropdown__container li a {
+  padding: 0 10px;
+  height: 22px;
+  display: flex;
+  cursor: pointer;
+  flex: 1;
+  align-items: center;
+}
