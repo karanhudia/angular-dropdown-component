@@ -114,6 +114,11 @@ export class DropdownComponent {
     this.showDropdown();
   }
 
+  onDropdownBlur() {
+    this.ifContainerFocused=false;
+    this.hideDropdown();
+  }
+
   showDropdown() {
     this.dropdownMenu.nativeElement.focus();
   }

@@ -1,7 +1,7 @@
 <ng-container>
   <div class="ng-dropdown">
     <span *ngIf="xTitle" [innerText]="xTitle" class="ng-dropdown__title"></span>
-    <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="ifContainerFocused=false" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
+    <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="onDropdownBlur()" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
       #dropdownMenu>
       <li>
         <a (click)="hideDropdown()">Dummy</a>
