@@ -18,6 +18,7 @@ export class DropdownComponent {
   @Input() disabled: boolean;
   @Input() dTitle: string;
   @Input() selectedOption: ISelectedOption;
+  @Input() filter: boolean;
 
   @Output()
   selectedOptionChange: EventEmitter<object> = new EventEmitter<object>();
@@ -74,21 +75,19 @@ export class DropdownComponent {
         top: distanceFromTop + "px",
         left: distanceFromLeft + "px",
         right: distanceFromRight + "px",
-        'flex-direction': 'column'
+        "flex-direction": "column"
       };
-    }
-    // If the space above is more than the dropdown height
-    else if (distanceFromTop > this.defaultDropdownHeight) {
+    } else if (distanceFromTop > this.defaultDropdownHeight) {
+      // If the space above is more than the dropdown height
       // Reversify the list of array
       this.containerFocusedStyles = {
         bottom: distanceFromBottom + "px",
         left: distanceFromLeft + "px",
         right: distanceFromRight + "px",
-        'flex-direction': 'column-reverse'
+        "flex-direction": "column-reverse"
       };
-    }
-    // If space above and below both are less, show where it is maximum
-    else {
+    } else {
+      // If space above and below both are less, show where it is maximum
       // When space below is more
       if (distanceFromBottom > distanceFromTop) {
         this.containerFocusedStyles = {
@@ -96,17 +95,16 @@ export class DropdownComponent {
           bottom: "20px",
           left: distanceFromLeft + "px",
           right: distanceFromRight + "px",
-          'flex-direction': 'column'
+          "flex-direction": "column"
         };
-      }
-      // When space above is more
-      else {
+      } else {
+        // When space above is more
         this.containerFocusedStyles = {
           top: "20px",
           bottom: distanceFromBottom + "px",
           left: distanceFromLeft + "px",
           right: distanceFromRight + "px",
-          'flex-direction': 'column-reverse'
+          "flex-direction": "column-reverse"
         };
       }
     }
@@ -117,8 +115,7 @@ export class DropdownComponent {
 
     if (this.selectedOption.hasOwnProperty("id"))
       this.selectedOption = { id: this._selectedOption.id };
-    else
-      this.selectedOption = { name: this._selectedOption.name };
+    else this.selectedOption = { name: this._selectedOption.name };
 
     // Broadcast Event
     this.selectedOptionChange.emit(this.selectedOption);
@@ -131,8 +128,9 @@ export class DropdownComponent {
     this.showDropdown();
   }
 
-  onDropdownBlur() {
-    this.ifContainerFocused=false;
+  onDropdownBlur($event) {
+    if ($event.relatedTarget instanceof HTMLInputElement) return;
+    this.ifContainerFocused = false;
     this.hideDropdown();
   }
 

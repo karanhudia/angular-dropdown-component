@@ -1,10 +1,13 @@
 <ng-container>
   <div class="ng-dropdown">
     <span *ngIf="xTitle" [innerText]="xTitle" class="ng-dropdown__title"></span>
-    <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="onDropdownBlur()" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
+    <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="onDropdownBlur($event)" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
       #dropdownMenu>
       <li>
         <a (click)="hideDropdown()">Dummy</a>
+      </li>
+      <li *ngIf="filter">
+        <input placeholder="Search" (blur)="onDropdownBlur($event)"/>
       </li>
       <li *ngFor="let option of data">
         <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>

@@ -63,3 +63,13 @@
   align-items: center;
   user-select: none;
 }
+
+.ng-dropdown .ng-dropdown__container li input {
+  width: 100%;
+    padding: 0 9px;
+    height: 22px;
+    outline: none;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #e0e0e0;
+}
