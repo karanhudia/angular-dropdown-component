@@ -3,6 +3,9 @@
     <span *ngIf="xTitle" [innerText]="xTitle" class="ng-dropdown__title"></span>
     <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="ifContainerFocused=false" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
       #dropdownMenu>
+      <li>
+        <a (click)="hideDropdown()">Dummy</a>
+      </li>
       <li *ngFor="let option of data">
         <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>
       </li>

@@ -16,6 +16,7 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  z-index: 1000;
 }
 .ng-dropdown .ng-dropdown__button img {
   height: 10px;
@@ -33,7 +34,7 @@
   outline: none;
   box-sizing: border-box;
   overflow: auto;
-  z-index: 10001;
+  z-index: 999;
   padding: 0;
   margin: 0;
 }

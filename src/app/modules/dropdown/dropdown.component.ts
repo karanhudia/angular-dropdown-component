@@ -65,7 +65,7 @@ export class DropdownComponent {
 
     if (distanceFromBottom > this.defaultDropdownHeight) {
       this.containerFocusedStyles = {
-        top: distanceFromTop + dropdownButtonElement.offsetHeight + "px",
+        top: distanceFromTop + "px",
         left: distanceFromLeft + "px",
         right: distanceFromRight + "px"
       };
@@ -105,12 +105,20 @@ export class DropdownComponent {
 
     // Broadcast Event
     this.selectedOptionChange.emit(this.selectedOption);
-    this.dropdownMenu.nativeElement.blur();
+    this.hideDropdown();
   }
 
   onDropdownMenuClick($event: MouseEvent) {
     console.log("Dropdown button clicked.");
     this.setContainerDimensions();
+    this.showDropdown();
+  }
+
+  showDropdown() {
     this.dropdownMenu.nativeElement.focus();
+  }
+
+  hideDropdown() {
+    this.dropdownMenu.nativeElement.blur();
   }
 }
