@@ -9,7 +9,7 @@ import { IDropdownInput, ISelectedOption } from '../../interfaces/dropdown';
   styleUrls: ["./dropdown.component.css"]
 })
 export class DropdownComponent {
-  public ifContainerFocused: boolean = false;
+  public ifContainerFocused: boolean;
   public containerFocusedStyles: object;
   public defaultDropdownHeight: number;
   public _selectedOption: IDropdownInput;
@@ -25,6 +25,10 @@ export class DropdownComponent {
   // References of HTML
   @ViewChild("dropdownMenu") private dropdownMenu: ElementRef;
   @ViewChild("dropdownButton") private dropdownButton: ElementRef;
+
+  constructor() {
+    this.ifContainerFocused = false;
+  }
 
   ngOnChanges() {
     if (this.data && !this.selectedOption) this.setDefaultOption();
@@ -63,33 +67,46 @@ export class DropdownComponent {
     let distanceFromRight =
       window.innerWidth - distanceFromLeft - dropdownButtonElement.offsetWidth;
 
+    // If the space below is more than the dropdown height
     if (distanceFromBottom > this.defaultDropdownHeight) {
+      // Un-reversify the list of array
       this.containerFocusedStyles = {
         top: distanceFromTop + "px",
         left: distanceFromLeft + "px",
-        right: distanceFromRight + "px"
+        right: distanceFromRight + "px",
+        'flex-direction': 'column'
       };
-    } else if (distanceFromTop > this.defaultDropdownHeight) {
+    }
+    // If the space above is more than the dropdown height
+    else if (distanceFromTop > this.defaultDropdownHeight) {
+      // Reversify the list of array
       this.containerFocusedStyles = {
-        bottom: distanceFromBottom + dropdownButtonElement.offsetHeight + "px",
+        bottom: distanceFromBottom + "px",
         left: distanceFromLeft + "px",
-        right: distanceFromRight + "px"
+        right: distanceFromRight + "px",
+        'flex-direction': 'column-reverse'
       };
-    } else {
+    }
+    // If space above and below both are less, show where it is maximum
+    else {
+      // When space below is more
       if (distanceFromBottom > distanceFromTop) {
         this.containerFocusedStyles = {
-          top: distanceFromTop + dropdownButtonElement.offsetHeight + "px",
+          top: distanceFromTop + "px",
           bottom: "20px",
           left: distanceFromLeft + "px",
-          right: distanceFromRight + "px"
+          right: distanceFromRight + "px",
+          'flex-direction': 'column'
         };
-      } else {
+      }
+      // When space above is more
+      else {
         this.containerFocusedStyles = {
           top: "20px",
-          bottom:
-            distanceFromBottom + dropdownButtonElement.offsetHeight + "px",
+          bottom: distanceFromBottom + "px",
           left: distanceFromLeft + "px",
-          right: distanceFromRight + "px"
+          right: distanceFromRight + "px",
+          'flex-direction': 'column-reverse'
         };
       }
     }
