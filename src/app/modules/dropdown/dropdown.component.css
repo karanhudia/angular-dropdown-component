@@ -16,6 +16,7 @@
   align-items: center;
   cursor: pointer;
   z-index: 1000;
+  height: 18px;
 }
 .ng-dropdown .ng-dropdown__button img {
   height: 10px;
