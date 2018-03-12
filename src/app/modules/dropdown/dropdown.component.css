@@ -47,6 +47,10 @@
   background-color: #6FBBFF;
   color: white;
 }
+.ng-dropdown .ng-dropdown__container li:first-child:hover {
+  background-color: initial;
+  color: intial;
+}
 .ng-dropdown .ng-dropdown__container li a {
   padding: 0 10px;
   height: 22px;
