@@ -24,6 +24,26 @@ export class AppComponent {
     {
       name: "No4",
       id: 3
+    },
+    {
+      name: "Fooasda",
+      id: 3
+    },
+    {
+      name: "Karans",
+      id: 3
+    },
+    {
+      name: "Hudiiiia",
+      id: 3
+    },
+    {
+      name: "Rinbaar",
+      id: 3
+    },
+    {
+      name: "Kuchbhii",
+      id: 3
     }
   ];
 

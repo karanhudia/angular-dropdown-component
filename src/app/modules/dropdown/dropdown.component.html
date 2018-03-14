@@ -7,11 +7,18 @@
         <a (click)="hideDropdown()">Dummy</a>
       </li>
       <li *ngIf="filter">
-        <input placeholder="Search" (blur)="onDropdownBlur($event)"/>
+        <input placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)"/>
       </li>
-      <li *ngFor="let option of data">
-        <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>
-      </li>
+      <ng-container *ngIf="_data?.length else noResults">
+        <li *ngFor="let option of _data">
+          <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>
+        </li>
+      </ng-container>
+      <ng-template #noResults>
+        <li>
+          <a>No Results Found</a>
+        </li>
+      </ng-template>
     </ul>
     <div class="ng-dropdown__button" [ngClass]="disabled ? 'disabled' : ''" (mouseup)="onDropdownMenuClick($event)" #dropdownButton>
       <span [innerText]="_selectedOption?.name"></span>

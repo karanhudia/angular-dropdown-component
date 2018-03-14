@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 
 // Import interfaces
 import { IDropdownInput, ISelectedOption } from '../../interfaces/dropdown';
@@ -12,6 +12,8 @@ export class DropdownComponent {
   public ifContainerFocused: boolean;
   public containerFocusedStyles: object;
   public _selectedOption: IDropdownInput;
+  public _data: IDropdownInput[];
+  public mutationObserverDOM: MutationObserver;
 
   @Input() data: IDropdownInput[];
   @Input() disabled: boolean;
@@ -30,7 +32,20 @@ export class DropdownComponent {
     this.ifContainerFocused = false;
   }
 
-  ngOnChanges() {
+  ngOnInit() {
+    this.mutationObserverDOM = new MutationObserver(mutations => {
+      this.setContainerDimensions();
+    });
+
+    this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement, {
+      childList: true
+    });
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
+    if (simpleChanges.hasOwnProperty("data")) {
+      this._data = this.data;
+    }
     if (this.data && !this.selectedOption) this.setDefaultOption();
     else if (this.data && this.selectedOption) {
       if (this.selectedOption.hasOwnProperty("id")) {
@@ -51,7 +66,14 @@ export class DropdownComponent {
   }
 
   setContainerDimensions() {
-    let defaultDropdownHeight = this.dropdownMenu.nativeElement.offsetHeight;
+    console.log("Setting container dimensions");
+    let defaultDropdownHeight = Array.from(
+      this.dropdownMenu.nativeElement.children
+    ).reduce(
+      (accumulator, currentValue) => accumulator + currentValue["offsetHeight"],
+      0
+    );
+    console.log(defaultDropdownHeight);
     let dropdownButtonElement = this.dropdownButton.nativeElement;
 
     var dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
@@ -107,6 +129,11 @@ export class DropdownComponent {
     }
   }
 
+  onFilterSearch($event) {
+    console.log("Searching");
+    this._data = this.data.filter(element => element.name.toLowerCase().indexOf($event.target.value.toLowerCase()) !== -1);
+  }
+
   onDropdownItemSelect($event: MouseEvent, option: IDropdownInput) {
     this._selectedOption = option;
 
@@ -137,5 +164,9 @@ export class DropdownComponent {
 
   hideDropdown() {
     this.dropdownMenu.nativeElement.blur();
+  }
+
+  ngOnDestroy() {
+    this.mutationObserverDOM.disconnect();
   }
 }
