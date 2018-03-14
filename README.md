@@ -1,27 +1,89 @@
-# AngularDropdownComponent
+# angular-dropdown-component
+## A full featured dropdown component for Angular (4 and above) from the creator of angular-tabs-component.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+Even though a dropdown (select-option) is a pretty common utility but it still doesn't support basics such as search.
 
-## Development server
+So, i decided to build one for Angular, with all the basic features-
+* Simple to use
+* Well Documented
+* Customizable CSS
+* NGC compatible
+* Supports AOT
+* Supports disabling, two-way binding, custom header and filter.
+* Easily styled (comes with very minimal styling)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+If you like this, support the project by starring it!
 
-## Code scaffolding
+## Angular supported version
+angular-dropdown-component supports 4.X.X releases (above), and AoT compilation.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Example
+To install the library:
+```
+npm install angular-dropdown-component
+```
 
-## Build
+Include the library into your app module-
+```
+import 'DropdownModule' from 'angular-tabs-component';
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Add it to your @NgModule imports-
+```
+@NgModule({
+  imports: [
+    BrowserModule
+    ...,
+    ...,
+    DropdownModule
+  ],
+  declarations: [...],
+  ...
+})
+```
 
-## Running unit tests
+## Usage
+```
+<ng-dropdown [data]="dummyData"></ng-dropdown>
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Options
 
-## Running end-to-end tests
+Apart from the default settings, there are a number of options that can be
+specified for the dropdown components. Options are specified by directly adding it to the
+element as attribute with property binding, attribute binding and event binding.
+Possible options are:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  * `data` (property): To set the data of that dropdown (required).
+  * `selectedOption` (property, supports two way binding): To set any option as the selected option -
+  Usage:
+    ```
+    <ng-dropdown [data]="dummyData" [(selectedOption)]="dummyOption"></ng-dropdown>
+    ```
+  * `disabled` (property): To set the dropdown disabled.
+  Usage:
+    ```
+    <ng-dropdown [data]="dummyData" [disabled]="true"></ng-dropdown>
+    ```
+  * `dTitle` (property): To set the header.
+  Usage:
+    ```
+    <ng-dropdown [data]="dummyData" dTitle="Custom Dropdown Example"></ng-dropdown>
+    ```
+  * `filter` (property): To set the filter on/off.
+  Usage:
+    ```
+    <ng-dropdown [data]="dummyData" [filter]="true"></ng-dropdown>
+    ```
 
-## Further help
+## What's next
+I would always love to hear suggestions for features & improvements - just open an issue.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Some things on our mind down the road:
+* Add more tests
+* Add more examples
+
+## Github
+
+
+Please check the issues / project before starting to work on a feature / bug to make sure it's not already in progress.
