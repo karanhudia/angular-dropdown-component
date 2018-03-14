@@ -11,7 +11,6 @@ import { IDropdownInput, ISelectedOption } from '../../interfaces/dropdown';
 export class DropdownComponent {
   public ifContainerFocused: boolean;
   public containerFocusedStyles: object;
-  public defaultDropdownHeight: number;
   public _selectedOption: IDropdownInput;
 
   @Input() data: IDropdownInput[];
@@ -45,9 +44,6 @@ export class DropdownComponent {
       }
       if (!this._selectedOption) this.setDefaultOption();
     }
-
-    if (!this.data) return;
-    this.defaultDropdownHeight = this.data.length * 22 + 2;
   }
 
   setDefaultOption() {
@@ -55,6 +51,7 @@ export class DropdownComponent {
   }
 
   setContainerDimensions() {
+    let defaultDropdownHeight = this.dropdownMenu.nativeElement.offsetHeight;
     let dropdownButtonElement = this.dropdownButton.nativeElement;
 
     var dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
@@ -69,7 +66,7 @@ export class DropdownComponent {
       window.innerWidth - distanceFromLeft - dropdownButtonElement.offsetWidth;
 
     // If the space below is more than the dropdown height
-    if (distanceFromBottom > this.defaultDropdownHeight) {
+    if (distanceFromBottom > defaultDropdownHeight) {
       // Un-reversify the list of array
       this.containerFocusedStyles = {
         top: distanceFromTop + "px",
@@ -77,7 +74,7 @@ export class DropdownComponent {
         right: distanceFromRight + "px",
         "flex-direction": "column"
       };
-    } else if (distanceFromTop > this.defaultDropdownHeight) {
+    } else if (distanceFromTop > defaultDropdownHeight) {
       // If the space above is more than the dropdown height
       // Reversify the list of array
       this.containerFocusedStyles = {

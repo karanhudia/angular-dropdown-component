@@ -28,6 +28,7 @@
 }
 .ng-dropdown .ng-dropdown__container {
   display: flex;
+  flex-direction: column;
   background: white;
   list-style-type: none;
   border: 1px solid #C9C9C9;
