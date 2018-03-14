@@ -1,6 +1,6 @@
 <ng-container>
   <div class="ng-dropdown">
-    <span *ngIf="xTitle" [innerText]="xTitle" class="ng-dropdown__title"></span>
+    <span *ngIf="dTitle" [innerText]="dTitle" class="ng-dropdown__title"></span>
     <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="onDropdownBlur($event)" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
       #dropdownMenu>
       <li>
