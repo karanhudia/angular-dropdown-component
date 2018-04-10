@@ -17,6 +17,11 @@
   cursor: pointer;
   height: 18px;
 }
+.ng-dropdown .ng-dropdown__button span {
+  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .ng-dropdown .ng-dropdown__button img {
   height: 10px;
   user-select: none;
@@ -50,6 +55,10 @@
   background-color: #6FBBFF;
   color: white;
 }
+.ng-dropdown .ng-dropdown__container li:first-child {
+  position: fixed;
+  background-color: white;
+}
 .ng-dropdown .ng-dropdown__container li:first-child:hover {
   background-color: initial;
   color: initial;
@@ -57,11 +66,15 @@
 .ng-dropdown .ng-dropdown__container li a {
   padding: 0 10px;
   height: 22px;
-  display: flex;
+  line-height: 22px;
   cursor: pointer;
   flex: 1;
   align-items: center;
   user-select: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: block;
 }
 
 .ng-dropdown .ng-dropdown__container li input {

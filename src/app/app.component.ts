@@ -42,7 +42,7 @@ export class AppComponent {
       id: 3
     },
     {
-      name: "Kuchbhii",
+      name: "This is a very long condition with a relatively long ttext",
       id: 3
     }
   ];

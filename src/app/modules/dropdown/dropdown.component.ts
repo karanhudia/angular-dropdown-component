@@ -10,7 +10,11 @@ import { IDropdownInput, ISelectedOption } from '../../interfaces/dropdown';
 })
 export class DropdownComponent {
   public ifContainerFocused: boolean;
+
   public containerFocusedStyles: object;
+  public selectedItemFocusedStyles: object;
+  public restOfListFocusedStyles: object;
+
   public _selectedOption: IDropdownInput;
   public _data: IDropdownInput[];
   public mutationObserverDOM: MutationObserver;
@@ -87,6 +91,9 @@ export class DropdownComponent {
     let distanceFromRight =
       window.innerWidth - distanceFromLeft - dropdownButtonElement.offsetWidth;
 
+    this.selectedItemFocusedStyles = {
+      width: dropdownButtonElement.offsetWidth + "px",
+    };
     // If the space below is more than the dropdown height
     if (distanceFromBottom > defaultDropdownHeight) {
       // Un-reversify the list of array
@@ -96,6 +103,7 @@ export class DropdownComponent {
         right: distanceFromRight + "px",
         "flex-direction": "column"
       };
+      this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
     } else if (distanceFromTop > defaultDropdownHeight) {
       // If the space above is more than the dropdown height
       // Reversify the list of array
@@ -105,6 +113,7 @@ export class DropdownComponent {
         right: distanceFromRight + "px",
         "flex-direction": "column-reverse"
       };
+      this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
     } else {
       // If space above and below both are less, show where it is maximum
       // When space below is more
@@ -116,6 +125,7 @@ export class DropdownComponent {
           right: distanceFromRight + "px",
           "flex-direction": "column"
         };
+        this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
       } else {
         // When space above is more
         this.containerFocusedStyles = {
@@ -125,13 +135,19 @@ export class DropdownComponent {
           right: distanceFromRight + "px",
           "flex-direction": "column-reverse"
         };
+        this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
       }
     }
   }
 
   onFilterSearch($event) {
     console.log("Searching");
-    this._data = this.data.filter(element => element.name.toLowerCase().indexOf($event.target.value.toLowerCase()) !== -1);
+    this._data = this.data.filter(
+      element =>
+        element.name
+          .toLowerCase()
+          .indexOf($event.target.value.toLowerCase()) !== -1
+    );
   }
 
   onDropdownItemSelect($event: MouseEvent, option: IDropdownInput) {

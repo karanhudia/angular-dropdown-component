@@ -3,10 +3,10 @@
     <span *ngIf="dTitle" [innerText]="dTitle" class="ng-dropdown__title"></span>
     <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="onDropdownBlur($event)" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
       #dropdownMenu>
-      <li>
+      <li [ngStyle]="ifContainerFocused ? selectedItemFocusedStyles: {}">
         <a [innerText]="_selectedOption?.name" (click)="hideDropdown()"></a>
       </li>
-      <li *ngIf="filter">
+      <li *ngIf="filter" [ngStyle]="ifContainerFocused ? restOfListFocusedStyles: {}">
         <input placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)"/>
       </li>
       <ng-container *ngIf="_data?.length else noResults">
