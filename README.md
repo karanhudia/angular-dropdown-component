@@ -44,6 +44,13 @@ Add it to your @NgModule imports-
 
 ## Usage
 ```
+dummyData = [{
+  id: 1,
+  name: "Foo"
+}, {
+  id: 2,
+  name: "Bar"
+}]
 <ng-dropdown [data]="dummyData"></ng-dropdown>
 ```
 
