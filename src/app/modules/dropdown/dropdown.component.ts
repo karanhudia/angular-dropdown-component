@@ -92,7 +92,7 @@ export class DropdownComponent {
       window.innerWidth - distanceFromLeft - dropdownButtonElement.offsetWidth;
 
     this.selectedItemFocusedStyles = {
-      width: dropdownButtonElement.offsetWidth + "px",
+      width: dropdownButtonElement.offsetWidth - 2 + "px",
     };
     // If the space below is more than the dropdown height
     if (distanceFromBottom > defaultDropdownHeight) {
