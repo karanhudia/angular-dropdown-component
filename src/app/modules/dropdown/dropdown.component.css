@@ -15,7 +15,6 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  z-index: 1000;
   height: 18px;
 }
 .ng-dropdown .ng-dropdown__button img {
@@ -53,7 +52,7 @@
 }
 .ng-dropdown .ng-dropdown__container li:first-child:hover {
   background-color: initial;
-  color: intial;
+  color: initial;
 }
 .ng-dropdown .ng-dropdown__container li a {
   padding: 0 10px;
