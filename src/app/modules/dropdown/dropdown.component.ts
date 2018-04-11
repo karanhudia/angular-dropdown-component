@@ -107,7 +107,7 @@ export class DropdownComponent {
       this.containerFocusedStyles = {
         "top": distanceFromTop + "px",
         "left": distanceFromLeft + "px",
-        "right": distanceFromRight + "px",
+        "width": dropdownButtonElement.offsetWidth +'px',
         "flex-direction": "column"
       };
       this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
@@ -118,7 +118,7 @@ export class DropdownComponent {
       this.containerFocusedStyles = {
         "bottom": distanceFromBottom + "px",
         "left": distanceFromLeft + "px",
-        "right": distanceFromRight + "px",
+        "width": dropdownButtonElement.offsetWidth +'px',
         "flex-direction": "column-reverse"
       };
       this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
@@ -132,7 +132,7 @@ export class DropdownComponent {
           "top": distanceFromTop + "px",
           "bottom": "20px",
           "left": distanceFromLeft + "px",
-          "right": distanceFromRight + "px",
+          "width": dropdownButtonElement.offsetWidth +'px',
           "flex-direction": "column"
         };
         this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
@@ -143,7 +143,7 @@ export class DropdownComponent {
           "top": "20px",
           "bottom": distanceFromBottom + "px",
           "left": distanceFromLeft + "px",
-          "right": distanceFromRight + "px",
+          "width": dropdownButtonElement.offsetWidth +'px',
           "flex-direction": "column-reverse"
         };
         this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
