@@ -88,13 +88,10 @@ export class DropdownComponent {
       );
     console.log(defaultDropdownHeight);
     let dropdownButtonElement = this.dropdownButton.nativeElement;
+    let dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
 
-    var dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
-    let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    let distanceFromTop = dropdownButtonRect.top + scrollTop;
-    let distanceFromLeft = dropdownButtonRect.left + scrollLeft;
+    let distanceFromTop = dropdownButtonRect.top;
+    let distanceFromLeft = dropdownButtonRect.left;
     let distanceFromBottom =
       window.innerHeight - distanceFromTop - dropdownButtonElement.offsetHeight;
     let distanceFromRight =
