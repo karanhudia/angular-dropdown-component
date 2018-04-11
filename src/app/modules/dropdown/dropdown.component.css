@@ -21,6 +21,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  user-select: none;
 }
 .ng-dropdown .ng-dropdown__button img {
   height: 10px;
