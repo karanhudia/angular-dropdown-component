@@ -34,6 +34,14 @@
     "packagr": "ng-packagr -p ng-package.json"
   },
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karanhudia/angular-dropdown-component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/karanhudia/angular-dropdown-component/issues"
+  },
+  "homepage": "https://github.com/karanhudia/angular-dropdown-component",
   "peerDependencies": {
     "@angular/common": "^4.0.0",
     "@angular/core": "^4.0.0"
