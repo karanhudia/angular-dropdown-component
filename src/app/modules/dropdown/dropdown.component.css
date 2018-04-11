@@ -17,7 +17,7 @@
   cursor: pointer;
   height: 18px;
 }
-.ng-dropdown .ng-dropdown__button span {
+.ng-dropdown .ng-dropdown__button span, .ng-dropdown__container>li a span {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
