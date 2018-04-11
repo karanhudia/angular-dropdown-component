@@ -37,7 +37,7 @@ export class DropdownComponent {
     this.ifContainerFocused = false;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.mutationObserverDOM = new MutationObserver(mutations => {
       this.setContainerDimensions();
     });
@@ -48,7 +48,7 @@ export class DropdownComponent {
     this.mutationObserverDOM.observe( this.dropdownMenu.nativeElement.children[1], {
       childList: true
     });
-    this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement.children[1].children[0], {
+    this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement.children[1].children[1], {
       childList: true
     });
   }
