@@ -4,21 +4,28 @@
     <ul class="ng-dropdown__container" tabindex="0" (focus)="ifContainerFocused=true" (blur)="onDropdownBlur($event)" [ngStyle]="ifContainerFocused ? containerFocusedStyles: {}"
       #dropdownMenu>
       <li [ngStyle]="ifContainerFocused ? selectedItemFocusedStyles: {}">
-        <a [innerText]="_selectedOption?.name" (click)="hideDropdown()"></a>
+        <a (click)="hideDropdown()">
+          <span [innerText]="_selectedOption?.name"></span>
+          <img src="assets/downPopup.png" />
+        </a>
       </li>
-      <li *ngIf="filter" [ngStyle]="ifContainerFocused ? restOfListFocusedStyles: {}">
-        <input placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)"/>
-      </li>
-      <ng-container *ngIf="_data?.length else noResults">
-        <li *ngFor="let option of _data">
-          <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>
+      <ul class="ng-dropdown__container--list" [ngStyle]="ifContainerFocused ? restOfListFocusedStyles: {}">
+        <li *ngIf="filter" [ngStyle]="ifContainerFocused ? selectedItemFocusedStyles: {}">
+          <input placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)" />
         </li>
-      </ng-container>
-      <ng-template #noResults>
-        <li>
-          <a>No Results Found</a>
-        </li>
-      </ng-template>
+        <ul class="ng-dropdown__container--list__sublist" [ngStyle]="ifContainerFocused ? restOfListWithoutFilterFocusedStyles: {}">
+          <ng-container *ngIf="_data?.length else noResults">
+            <li *ngFor="let option of _data">
+              <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>
+            </li>
+          </ng-container>
+          <ng-template #noResults>
+            <li>
+              <a>No Results Found</a>
+            </li>
+          </ng-template>
+        </ul>
+      </ul>
     </ul>
     <div class="ng-dropdown__button" [ngClass]="disabled ? 'disabled' : ''" (mouseup)="onDropdownMenuClick($event)" #dropdownButton>
       <span [innerText]="_selectedOption?.name"></span>

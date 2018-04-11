@@ -1,13 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { DropdownModule } from './modules/dropdown/dropdown.module';
+import { DropdownModule as MyD } from './modules/dropdown/dropdown.module';
+import { QuarkXpressNgModule } from "@quark/xpressng";
 
 import { AppComponent } from './app.component';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, DropdownModule],
+  imports: [BrowserModule, MyD, QuarkXpressNgModule],
   providers: [],
   bootstrap: [AppComponent]
 })

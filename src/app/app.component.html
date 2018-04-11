@@ -1,6 +1,10 @@
 <div class="app-container">
-  <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
-  <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
-  <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
-  <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+  <xpress-tabs>
+    <xpress-tab tabTitle="Custom">
+      <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+      <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+      <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+      <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+    </xpress-tab>
+  </xpress-tabs>
 </div>

@@ -14,6 +14,7 @@ export class DropdownComponent {
   public containerFocusedStyles: object;
   public selectedItemFocusedStyles: object;
   public restOfListFocusedStyles: object;
+  public restOfListWithoutFilterFocusedStyles: object;
 
   public _selectedOption: IDropdownInput;
   public _data: IDropdownInput[];
@@ -44,6 +45,12 @@ export class DropdownComponent {
     this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement, {
       childList: true
     });
+    this.mutationObserverDOM.observe( this.dropdownMenu.nativeElement.children[1], {
+      childList: true
+    });
+    this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement.children[1].children[0], {
+      childList: true
+    });
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
@@ -70,13 +77,15 @@ export class DropdownComponent {
   }
 
   setContainerDimensions() {
-    console.log("Setting container dimensions");
-    let defaultDropdownHeight = Array.from(
-      this.dropdownMenu.nativeElement.children
-    ).reduce(
-      (accumulator, currentValue) => accumulator + currentValue["offsetHeight"],
-      0
-    );
+    console.log("Setting container dimensions", this.dropdownMenu.nativeElement.children);
+    let defaultDropdownHeight =
+      this.dropdownMenu.nativeElement.children[0].offsetHeight +
+      this.dropdownMenu.nativeElement.children[1].children[0].offsetHeight +
+      Array.from(this.dropdownMenu.nativeElement.children[1].children[1].children).reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue["offsetHeight"],
+        0
+      );
     console.log(defaultDropdownHeight);
     let dropdownButtonElement = this.dropdownButton.nativeElement;
 
@@ -91,51 +100,55 @@ export class DropdownComponent {
     let distanceFromRight =
       window.innerWidth - distanceFromLeft - dropdownButtonElement.offsetWidth;
 
-    this.selectedItemFocusedStyles = {
-      width: dropdownButtonElement.offsetWidth - 2 + "px",
-    };
+    this.selectedItemFocusedStyles = { "width": dropdownButtonElement.offsetWidth - 2 + "px" };
     // If the space below is more than the dropdown height
     if (distanceFromBottom > defaultDropdownHeight) {
       // Un-reversify the list of array
       this.containerFocusedStyles = {
-        top: distanceFromTop + "px",
-        left: distanceFromLeft + "px",
-        right: distanceFromRight + "px",
+        "top": distanceFromTop + "px",
+        "left": distanceFromLeft + "px",
+        "right": distanceFromRight + "px",
         "flex-direction": "column"
       };
       this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
+      this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
     } else if (distanceFromTop > defaultDropdownHeight) {
       // If the space above is more than the dropdown height
       // Reversify the list of array
       this.containerFocusedStyles = {
-        bottom: distanceFromBottom + "px",
-        left: distanceFromLeft + "px",
-        right: distanceFromRight + "px",
+        "bottom": distanceFromBottom + "px",
+        "left": distanceFromLeft + "px",
+        "right": distanceFromRight + "px",
         "flex-direction": "column-reverse"
       };
       this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
+      this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
+      this.selectedItemFocusedStyles = { ...this.selectedItemFocusedStyles, "border-top": "1px solid #e0e0e0" };
     } else {
       // If space above and below both are less, show where it is maximum
       // When space below is more
       if (distanceFromBottom > distanceFromTop) {
         this.containerFocusedStyles = {
-          top: distanceFromTop + "px",
-          bottom: "20px",
-          left: distanceFromLeft + "px",
-          right: distanceFromRight + "px",
+          "top": distanceFromTop + "px",
+          "bottom": "20px",
+          "left": distanceFromLeft + "px",
+          "right": distanceFromRight + "px",
           "flex-direction": "column"
         };
         this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
+        this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
       } else {
         // When space above is more
         this.containerFocusedStyles = {
-          top: "20px",
-          bottom: distanceFromBottom + "px",
-          left: distanceFromLeft + "px",
-          right: distanceFromRight + "px",
+          "top": "20px",
+          "bottom": distanceFromBottom + "px",
+          "left": distanceFromLeft + "px",
+          "right": distanceFromRight + "px",
           "flex-direction": "column-reverse"
         };
         this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
+        this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
+        this.selectedItemFocusedStyles = { ...this.selectedItemFocusedStyles, "border-top": "1px solid #e0e0e0" };
       }
     }
   }

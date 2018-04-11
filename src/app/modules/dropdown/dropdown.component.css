@@ -40,7 +40,6 @@
   left: -10000px;
   outline: none;
   box-sizing: border-box;
-  overflow: auto;
   z-index: 100000;
   padding: 0;
   margin: 0;
@@ -56,14 +55,22 @@
   background-color: #6FBBFF;
   color: white;
 }
-.ng-dropdown .ng-dropdown__container li:first-child {
+.ng-dropdown .ng-dropdown__container>li:first-child, .ng-dropdown__container--list>li:first-child {
   position: fixed;
   background-color: white;
 }
-.ng-dropdown .ng-dropdown__container li:first-child:hover {
+.ng-dropdown .ng-dropdown__container>li:first-child a, .ng-dropdown__container--list>li:first-child a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ng-dropdown .ng-dropdown__container>li:first-child a img, .ng-dropdown__container--list>li:first-child a img {
+  height: 10px;
+}
+.ng-dropdown .ng-dropdown__container>li:first-child:hover, .ng-dropdown__container--list>li:first-child:hover {
   color: initial;
 }
-.ng-dropdown .ng-dropdown__container li a {
+.ng-dropdown .ng-dropdown__container li a,.ng-dropdown__container--list>li:first-child li a {
   padding: 0 10px;
   height: 22px;
   line-height: 22px;
@@ -86,4 +93,14 @@
   border: none;
   border-bottom: 1px solid #e0e0e0;
   border-top: 1px solid #e0e0e0;
+}
+
+.ng-dropdown .ng-dropdown__container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+.ng-dropdown__container--list__sublist li:first-child {
+  position: initial;
 }
