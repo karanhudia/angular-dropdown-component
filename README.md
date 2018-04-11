@@ -91,6 +91,6 @@ Some things on our mind down the road:
 * Add more examples
 
 ## Github
-
+[Repository Link](https://github.com/karanhudia/angular-dropdown-component/)
 
 Please check the issues / project before starting to work on a feature / bug to make sure it's not already in progress.
