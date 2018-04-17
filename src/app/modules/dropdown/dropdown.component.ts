@@ -48,7 +48,10 @@ export class DropdownComponent {
     this.mutationObserverDOM.observe( this.dropdownMenu.nativeElement.children[1], {
       childList: true
     });
-    this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement.children[1].children[1], {
+    if (this.filter) this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement.children[1].children[1], {
+      childList: true
+    });
+    else this.mutationObserverDOM.observe(this.dropdownMenu.nativeElement.children[1].children[0], {
       childList: true
     });
   }
@@ -78,14 +81,16 @@ export class DropdownComponent {
 
   setContainerDimensions() {
     console.log("Setting container dimensions", this.dropdownMenu.nativeElement.children);
-    let defaultDropdownHeight =
-      this.dropdownMenu.nativeElement.children[0].offsetHeight +
-      this.dropdownMenu.nativeElement.children[1].children[0].offsetHeight +
-      Array.from(this.dropdownMenu.nativeElement.children[1].children[1].children).reduce(
-        (accumulator, currentValue) =>
-          accumulator + currentValue["offsetHeight"],
-        0
-      );
+    let defaultDropdownHeight = this.dropdownMenu.nativeElement.children[0].offsetHeight;
+    let actualList;
+    if (this.filter) {
+      defaultDropdownHeight += this.dropdownMenu.nativeElement.children[1].children[0].offsetHeight;
+      actualList = this.dropdownMenu.nativeElement.children[1].children[1].children;
+    }
+    else actualList = this.dropdownMenu.nativeElement.children[1].children[0].children;
+
+    defaultDropdownHeight += Array.from(actualList).reduce((accumulator, currentValue) => accumulator + currentValue["offsetHeight"], 0);
+
     console.log(defaultDropdownHeight);
     let dropdownButtonElement = this.dropdownButton.nativeElement;
     let dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
