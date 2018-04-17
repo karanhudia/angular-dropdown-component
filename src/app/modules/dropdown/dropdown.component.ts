@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 
 // Import interfaces
-import { IDropdownInput, ISelectedOption } from '../../interfaces/dropdown';
+import { IDropdownInput } from '../../interfaces/dropdown';
 
 @Component({
   selector: "ng-dropdown",
@@ -16,22 +16,23 @@ export class DropdownComponent {
   public restOfListFocusedStyles: object;
   public restOfListWithoutFilterFocusedStyles: object;
 
-  public _selectedOption: IDropdownInput;
+  public _selectedOption: IDropdownInput | string;
   public _data: IDropdownInput[];
   public mutationObserverDOM: MutationObserver;
 
   @Input() data: IDropdownInput[];
   @Input() disabled: boolean;
   @Input() dTitle: string;
-  @Input() selectedOption: ISelectedOption;
+  @Input() selectedOption: IDropdownInput | string;
   @Input() filter: boolean;
+  @Input() editable: boolean;
 
-  @Output()
-  selectedOptionChange: EventEmitter<object> = new EventEmitter<object>();
+  @Output() selectedOptionChange: EventEmitter<object | string> = new EventEmitter<object | string>();
 
   // References of HTML
   @ViewChild("dropdownMenu") private dropdownMenu: ElementRef;
   @ViewChild("dropdownButton") private dropdownButton: ElementRef;
+  @ViewChild("dropdownInput") private dropdownInput: ElementRef;
 
   constructor() {
     this.ifContainerFocused = false;
@@ -62,13 +63,17 @@ export class DropdownComponent {
     }
     if (this.data && !this.selectedOption) this.setDefaultOption();
     else if (this.data && this.selectedOption) {
+      if (this.editable) {
+        this._selectedOption = this.selectedOption;
+        return;
+      }
       if (this.selectedOption.hasOwnProperty("id")) {
         this.data.forEach(obj => {
-          if (obj.id == this.selectedOption.id) this._selectedOption = obj;
+          if (obj.id == this.selectedOption["id"]) this._selectedOption = obj;
         });
       } else {
         this.data.forEach(obj => {
-          if (obj.name == this.selectedOption.name) this._selectedOption = obj;
+          if (obj.name == this.selectedOption["name"]) this._selectedOption = obj;
         });
       }
       if (!this._selectedOption) this.setDefaultOption();
@@ -165,22 +170,38 @@ export class DropdownComponent {
     );
   }
 
-  onDropdownItemSelect($event: MouseEvent, option: IDropdownInput) {
-    this._selectedOption = option;
+  onInputFocus($event) {
+    console.log($event);
+    this.dropdownInput.nativeElement.focus();
+    this.ifContainerFocused = false;
+  }
 
-    if (this.selectedOption.hasOwnProperty("id"))
-      this.selectedOption = { id: this._selectedOption.id };
-    else this.selectedOption = { name: this._selectedOption.name };
+  onInputChange($event) {
+    console.log($event);
+    this._selectedOption = $event.target.value;
 
     // Broadcast Event
-    this.selectedOptionChange.emit(this.selectedOption);
+    this.selectedOptionChange.emit(this._selectedOption);
+  }
+
+  onDropdownItemSelect($event: MouseEvent, option: IDropdownInput) {
+    if (this.editable) this._selectedOption = option.name;
+    else this._selectedOption = option;
+
+    // if (this.selectedOption.hasOwnProperty("id"))
+    //   this.selectedOption = { id: this._selectedOption.id };
+    // else this.selectedOption = { name: this._selectedOption.name };
+
+    // Broadcast Event
+    this.selectedOptionChange.emit(option);
     this.hideDropdown();
   }
 
   onDropdownMenuClick($event: MouseEvent) {
     console.log("Dropdown button clicked.");
     this.setContainerDimensions();
-    this.showDropdown();
+    if ($event.target instanceof HTMLInputElement) return;
+    else this.showDropdown();
   }
 
   onDropdownBlur($event) {

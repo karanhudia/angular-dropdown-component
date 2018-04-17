@@ -5,13 +5,16 @@
       #dropdownMenu>
       <li [ngStyle]="ifContainerFocused ? selectedItemFocusedStyles: {}">
         <a (click)="hideDropdown()">
-          <span [innerText]="_selectedOption?.name"></span>
+          <span *ngIf="!editable; else ifEditableList" (focus)="onInputFocus($event)" [innerText]="_selectedOption?.name"></span>
+          <ng-template #ifEditableList>
+            <input class="ng-dropdown__container--editable" *ngIf="editable" [ngModel]="_selectedOption" (focus)="onInputFocus($event)"/>
+          </ng-template>
           <img src="assets/downPopup.png" />
         </a>
       </li>
       <ul class="ng-dropdown__container--list" [ngStyle]="ifContainerFocused ? restOfListFocusedStyles: {}">
         <li *ngIf="filter" [ngStyle]="ifContainerFocused ? selectedItemFocusedStyles: {}">
-          <input placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)" />
+          <input class="ng-dropdown__container--list__filter" placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)" />
         </li>
         <ul class="ng-dropdown__container--list__sublist" [ngStyle]="filter ? (ifContainerFocused ? restOfListWithoutFilterFocusedStyles: {}) : {}">
           <ng-container *ngIf="_data?.length else noResults">
@@ -28,7 +31,10 @@
       </ul>
     </ul>
     <div class="ng-dropdown__button" [ngClass]="disabled ? 'disabled' : ''" (mouseup)="onDropdownMenuClick($event)" #dropdownButton>
-      <span [innerText]="_selectedOption?.name"></span>
+      <span *ngIf="!editable; else ifEditable" [innerText]="_selectedOption?.name"></span>
+      <ng-template #ifEditable>
+        <input #dropdownInput *ngIf="editable" (keyup)="onInputChange($event)" [(ngModel)]="_selectedOption" />
+      </ng-template>
       <img src="assets/downPopup.png" />
     </div>
   </div>

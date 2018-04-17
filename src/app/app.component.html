@@ -1,8 +1,8 @@
 <div class="app-container">
   <xpress-tabs>
     <xpress-tab tabTitle="Custom">
-      <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
-      <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+      <ng-dropdown dTitle="Custom Header" [disabled]="true" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
+      <ng-dropdown dTitle="Custom Header" [editable]="true" [data]="dummyData" [filter]="true" selectedOption="karan" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
       <ng-dropdown dTitle="Custom Header" [data]="dummyData" [filter]="true" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
       <ng-dropdown dTitle="Custom Header" [data]="dummyData" [(selectedOption)]="dummyOption" (selectedOptionChange)="dummyChange($event)"></ng-dropdown>
     </xpress-tab>

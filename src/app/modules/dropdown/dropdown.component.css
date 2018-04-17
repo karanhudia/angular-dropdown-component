@@ -27,6 +27,13 @@
   height: 10px;
   user-select: none;
 }
+.ng-dropdown .ng-dropdown__button input,.ng-dropdown .ng-dropdown__container li input.ng-dropdown__container--editable {
+  width: 100%;
+  border: none;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .ng-dropdown .ng-dropdown__button.disabled {
   pointer-events: none;
   opacity: 0.7;
@@ -84,8 +91,7 @@
   white-space: nowrap;
   display: block;
 }
-
-.ng-dropdown .ng-dropdown__container li input {
+.ng-dropdown .ng-dropdown__container li input.ng-dropdown__container--list__filter {
   width: 100%;
   padding: 0 9px;
   height: 22px;
