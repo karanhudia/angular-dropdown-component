@@ -14,9 +14,9 @@
       </li>
       <ul class="ng-dropdown__container--list" [ngStyle]="ifContainerFocused ? restOfListFocusedStyles: {}">
         <li *ngIf="filter" [ngStyle]="ifContainerFocused ? selectedItemFocusedStyles: {}">
-          <input class="ng-dropdown__container--list__filter" placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)" />
+          <input #dropdownFilter class="ng-dropdown__container--list__filter" placeholder="Search" (keyup)="onFilterSearch($event)" (blur)="onDropdownBlur($event)" />
         </li>
-        <ul class="ng-dropdown__container--list__sublist" [ngStyle]="filter ? (ifContainerFocused ? restOfListWithoutFilterFocusedStyles: {}) : {}">
+        <ul class="ng-dropdown__container--list__sublist" [ngStyle]="ifContainerFocused ? restOfListWithoutFilterFocusedStyles: {}">
           <ng-container *ngIf="_data?.length else noResults">
             <li *ngFor="let option of _data">
               <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>

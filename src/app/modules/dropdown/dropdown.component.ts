@@ -33,6 +33,7 @@ export class DropdownComponent {
   @ViewChild("dropdownMenu") private dropdownMenu: ElementRef;
   @ViewChild("dropdownButton") private dropdownButton: ElementRef;
   @ViewChild("dropdownInput") private dropdownInput: ElementRef;
+  @ViewChild("dropdownFilter") private dropdownFilter: ElementRef;
 
   constructor() {
     this.ifContainerFocused = false;
@@ -99,6 +100,7 @@ export class DropdownComponent {
     console.log(defaultDropdownHeight);
     let dropdownButtonElement = this.dropdownButton.nativeElement;
     let dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
+    let dropdownFilterHeight = this.filter ? this.dropdownFilter.nativeElement.offsetHeight : 0;
 
     let distanceFromTop = dropdownButtonRect.top;
     let distanceFromLeft = dropdownButtonRect.left;
@@ -107,7 +109,11 @@ export class DropdownComponent {
     let distanceFromRight =
       window.innerWidth - distanceFromLeft - dropdownButtonElement.offsetWidth;
 
-    this.selectedItemFocusedStyles = { "width": dropdownButtonElement.offsetWidth - 2 + "px" };
+    this.selectedItemFocusedStyles = {
+      "width": dropdownButtonElement.offsetWidth - 2 + "px",
+      "height": dropdownButtonElement.offsetHeight - 2 + "px"
+    };
+    this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownFilterHeight + "px" };
     // If the space below is more than the dropdown height
     if (distanceFromBottom > defaultDropdownHeight) {
       // Un-reversify the list of array
@@ -118,7 +124,6 @@ export class DropdownComponent {
         "flex-direction": "column"
       };
       this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
-      this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
     } else if (distanceFromTop > defaultDropdownHeight) {
       // If the space above is more than the dropdown height
       // Reversify the list of array
@@ -129,7 +134,6 @@ export class DropdownComponent {
         "flex-direction": "column-reverse"
       };
       this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
-      this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
       this.selectedItemFocusedStyles = { ...this.selectedItemFocusedStyles, "border-top": "1px solid #e0e0e0" };
     } else {
       // If space above and below both are less, show where it is maximum
@@ -143,7 +147,6 @@ export class DropdownComponent {
           "flex-direction": "column"
         };
         this.restOfListFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
-        this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
       } else {
         // When space above is more
         this.containerFocusedStyles = {
@@ -154,7 +157,6 @@ export class DropdownComponent {
           "flex-direction": "column-reverse"
         };
         this.restOfListFocusedStyles = { "margin-bottom": dropdownButtonElement.offsetHeight + "px" };
-        this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownButtonElement.offsetHeight + "px" };
         this.selectedItemFocusedStyles = { ...this.selectedItemFocusedStyles, "border-top": "1px solid #e0e0e0" };
       }
     }
