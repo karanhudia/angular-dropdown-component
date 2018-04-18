@@ -7,7 +7,7 @@
         <a (click)="hideDropdown()">
           <span *ngIf="!editable; else ifEditableList" (focus)="onInputFocus($event)" [innerText]="_selectedOption?.name"></span>
           <ng-template #ifEditableList>
-            <input class="ng-dropdown__container--editable" *ngIf="editable" [ngModel]="_selectedOption" (focus)="onInputFocus($event)"/>
+            <input class="ng-dropdown__container--editable" [ngModel]="_selectedOption | GetSelectedNamePipe" (focus)="onInputFocus($event)"/>
           </ng-template>
           <img src="assets/downPopup.png" />
         </a>
@@ -33,7 +33,7 @@
     <div class="ng-dropdown__button" [ngClass]="disabled ? 'disabled' : ''" (mouseup)="onDropdownMenuClick($event)" #dropdownButton>
       <span *ngIf="!editable; else ifEditable" [innerText]="_selectedOption?.name"></span>
       <ng-template #ifEditable>
-        <input #dropdownInput *ngIf="editable" (keyup)="onInputChange($event)" [(ngModel)]="_selectedOption" />
+        <input #dropdownInput (keyup)="onInputChange($event)" [ngModel]="_selectedOption | GetSelectedNamePipe" />
       </ng-template>
       <img src="assets/downPopup.png" />
     </div>

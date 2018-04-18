@@ -64,25 +64,25 @@ export class DropdownComponent {
     }
     if (this.data && !this.selectedOption) this.setDefaultOption();
     else if (this.data && this.selectedOption) {
-      if (this.editable) {
-        this._selectedOption = this.selectedOption;
-        return;
-      }
       if (this.selectedOption.hasOwnProperty("id")) {
         this.data.forEach(obj => {
           if (obj.id == this.selectedOption["id"]) this._selectedOption = obj;
         });
-      } else {
+      } else if (this.selectedOption.hasOwnProperty("name")){
         this.data.forEach(obj => {
           if (obj.name == this.selectedOption["name"]) this._selectedOption = obj;
         });
+      } else if (this.editable) {
+        this._selectedOption = this.selectedOption;
+        return;
       }
       if (!this._selectedOption) this.setDefaultOption();
     }
   }
 
   setDefaultOption() {
-    this._selectedOption = this.data[0];
+    if (this.editable) this._selectedOption = "";
+    else this._selectedOption = this.data[0];
   }
 
   setContainerDimensions() {

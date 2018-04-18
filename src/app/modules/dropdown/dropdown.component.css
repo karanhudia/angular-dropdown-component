@@ -61,8 +61,8 @@
   pointer-events: none;
 }
 .ng-dropdown .ng-dropdown__container li:hover {
-  background-color: #6FBBFF;
-  color: white;
+  background-color: #e0e0e0;
+  color: black;
 }
 .ng-dropdown .ng-dropdown__container>li:first-child a {
   height: 100%;
@@ -94,6 +94,7 @@
   overflow: hidden;
   white-space: nowrap;
   display: block;
+  text-align: left;
 }
 .ng-dropdown .ng-dropdown__container li input.ng-dropdown__container--list__filter {
   width: 100%;
