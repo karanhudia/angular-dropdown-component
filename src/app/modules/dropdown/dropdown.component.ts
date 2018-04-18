@@ -207,7 +207,7 @@ export class DropdownComponent {
   }
 
   onDropdownBlur($event) {
-    if ($event.relatedTarget instanceof HTMLInputElement) return;
+    if (this.dropdownFilter && $event.relatedTarget == this.dropdownFilter.nativeElement && $event.relatedTarget instanceof HTMLInputElement) return;
     this.ifContainerFocused = false;
     this.hideDropdown();
   }
