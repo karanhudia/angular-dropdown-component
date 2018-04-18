@@ -164,12 +164,13 @@ export class DropdownComponent {
 
   onFilterSearch($event) {
     console.log("Searching");
-    this._data = this.data.filter(
-      element =>
-        element.name
-          .toLowerCase()
-          .indexOf($event.target.value.toLowerCase()) !== -1
-    );
+    this.setSearchedItems($event.target.value)
+  }
+
+  setSearchedItems(value) {
+    this._data = this.data.filter(element => element.name
+    .toLowerCase()
+    .indexOf(value.toLowerCase()) !== -1);
   }
 
   onInputFocus($event) {
@@ -201,6 +202,7 @@ export class DropdownComponent {
 
   onDropdownMenuClick($event: MouseEvent) {
     console.log("Dropdown button clicked.");
+    this.clearSearchFilter();
     this.setContainerDimensions();
     if ($event.target instanceof HTMLInputElement) return;
     else this.showDropdown();
@@ -210,6 +212,11 @@ export class DropdownComponent {
     if (this.dropdownFilter && $event.relatedTarget == this.dropdownFilter.nativeElement && $event.relatedTarget instanceof HTMLInputElement) return;
     this.ifContainerFocused = false;
     this.hideDropdown();
+  }
+
+  clearSearchFilter() {
+    this.dropdownFilter.nativeElement.value = "";
+    this.setSearchedItems("");
   }
 
   showDropdown() {
