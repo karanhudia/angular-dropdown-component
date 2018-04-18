@@ -215,6 +215,7 @@ export class DropdownComponent {
   }
 
   clearSearchFilter() {
+    if (!this.dropdownFilter) return;
     this.dropdownFilter.nativeElement.value = "";
     this.setSearchedItems("");
   }
