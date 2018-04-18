@@ -111,7 +111,7 @@ export class DropdownComponent {
 
     this.selectedItemFocusedStyles = {
       "width": dropdownButtonElement.offsetWidth - 2 + "px",
-      "height": dropdownButtonElement.offsetHeight - 2 + "px"
+      "height": dropdownButtonElement.offsetHeight -2 + "px"
     };
     this.restOfListWithoutFilterFocusedStyles = { "margin-top": dropdownFilterHeight + "px" };
     // If the space below is more than the dropdown height
