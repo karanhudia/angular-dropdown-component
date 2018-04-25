@@ -11,6 +11,9 @@ So, i decided to build one for Angular, with all the basic features-
 * Supports AOT
 * Supports disabling, two-way binding, custom header and filter.
 * Easily styled (comes with very minimal styling)
+* Ability to search within the options.
+* Shows selected option as active when opened.
+* Supports editable feature to provide you the agility of either using string or object.
 
 If you like this, support the project by starring it!
 
