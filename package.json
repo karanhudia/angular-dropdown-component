@@ -31,7 +31,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "packagr": "ng-packagr -p ng-package.json"
+    "packagr": "ng-packagr -p ng-package.json",
+    "publish-library": "npm version patch && npm run packgr && npm publish dist"
   },
   "private": false,
   "repository": {
@@ -42,6 +43,9 @@
     "url": "https://github.com/karanhudia/angular-dropdown-component/issues"
   },
   "homepage": "https://github.com/karanhudia/angular-dropdown-component",
+  "publishConfig":{
+    "registry":"http://registry.npmjs.org/"
+  },
   "peerDependencies": {
     "@angular/common": "^4.0.0",
     "@angular/core": "^4.0.0"
