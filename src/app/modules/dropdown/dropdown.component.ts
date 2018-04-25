@@ -86,7 +86,6 @@ export class DropdownComponent {
   }
 
   setContainerDimensions() {
-    console.log("Setting container dimensions", this.dropdownMenu.nativeElement.children);
     let defaultDropdownHeight = this.dropdownMenu.nativeElement.children[0].offsetHeight;
     let actualList;
     if (this.filter) {
@@ -97,7 +96,6 @@ export class DropdownComponent {
 
     defaultDropdownHeight += Array.from(actualList).reduce((accumulator, currentValue) => accumulator + currentValue["offsetHeight"], 0);
 
-    console.log(defaultDropdownHeight);
     let dropdownButtonElement = this.dropdownButton.nativeElement;
     let dropdownButtonRect = dropdownButtonElement.getBoundingClientRect();
     let dropdownFilterHeight = this.filter ? this.dropdownFilter.nativeElement.offsetHeight : 0;
@@ -163,7 +161,6 @@ export class DropdownComponent {
   }
 
   onFilterSearch($event) {
-    console.log("Searching");
     this.setSearchedItems($event.target.value)
   }
 
@@ -174,13 +171,11 @@ export class DropdownComponent {
   }
 
   onInputFocus($event) {
-    console.log($event);
     this.dropdownInput.nativeElement.focus();
     this.ifContainerFocused = false;
   }
 
   onInputChange($event) {
-    console.log($event);
     this._selectedOption = $event.target.value;
 
     // Broadcast Event
@@ -200,7 +195,6 @@ export class DropdownComponent {
   }
 
   onDropdownMenuClick($event: MouseEvent) {
-    console.log("Dropdown button clicked.");
     this.clearSearchFilter();
     this.setContainerDimensions();
     if ($event.target instanceof HTMLInputElement) return;
