@@ -18,7 +18,7 @@
         </li>
         <ul class="ng-dropdown__container--list__sublist" [ngStyle]="ifContainerFocused ? restOfListWithoutFilterFocusedStyles: {}">
           <ng-container *ngIf="_data?.length else noResults">
-            <li *ngFor="let option of _data">
+            <li *ngFor="let option of _data" [ngClass]="_selectedOption?.name == option.name ? 'active' : ''">
               <a [innerText]="option.name" (click)="onDropdownItemSelect($event, option)"></a>
             </li>
           </ng-container>

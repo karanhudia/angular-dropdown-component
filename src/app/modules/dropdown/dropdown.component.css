@@ -116,3 +116,7 @@
 .ng-dropdown__container--list__sublist li:first-child {
   position: initial;
 }
+.ng-dropdown__container--list__sublist li.active {
+  background-color: #6FBBFF;
+  color: white;
+}

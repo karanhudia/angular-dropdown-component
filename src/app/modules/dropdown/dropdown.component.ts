@@ -188,8 +188,7 @@ export class DropdownComponent {
   }
 
   onDropdownItemSelect($event: MouseEvent, option: IDropdownInput) {
-    if (this.editable) this._selectedOption = option.name;
-    else this._selectedOption = option;
+    this._selectedOption = option;
 
     // if (this.selectedOption.hasOwnProperty("id"))
     //   this.selectedOption = { id: this._selectedOption.id };
