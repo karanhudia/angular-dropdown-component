@@ -85,11 +85,16 @@ Possible options are:
     ```
     <ng-dropdown [data]="dummyData" [filter]="true"></ng-dropdown>
     ```
+  * `filter` (property): To set the filter on/off.
+  Usage:
+    ```
+    <ng-dropdown [data]="dummyData" [editable]="true"></ng-dropdown>
+    ```
 
 ## What's next
 I would always love to hear suggestions for features & improvements - just open an issue.
 
-Some things on our mind down the road:
+Some things on my mind down the road:
 * Add more tests
 * Add more examples
 
