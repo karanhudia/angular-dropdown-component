@@ -28,7 +28,7 @@ npm install angular-dropdown-component
 
 Include the library into your app module-
 ```
-import 'DropdownModule' from 'angular-tabs-component';
+import {DropdownModule} from 'angular-tabs-component';
 ```
 
 Add it to your @NgModule imports-
